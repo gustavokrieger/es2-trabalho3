@@ -10,7 +10,7 @@ class Height {
     Height(int value) {
         int minimum = 0;
         if (value < minimum) {
-            throw new IllegalArgumentException("Value needs to be higher than " + minimum);
+            throw new IllegalArgumentException("Value needs to be at least " + minimum);
         }
         this.value = value;
     }

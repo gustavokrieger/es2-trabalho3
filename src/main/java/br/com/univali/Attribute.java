@@ -5,8 +5,8 @@ record Attribute(int value) {
         int minimum = 0;
         int maximum = 100;
         if (value < minimum || value > maximum) {
-            throw new IllegalArgumentException("Value needs to be higher than " + minimum
-                    + " and lower than " + maximum);
+            throw new IllegalArgumentException("Value needs to be at least " + minimum
+                    + " and at most " + maximum);
         }
     }
 }
