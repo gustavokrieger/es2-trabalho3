@@ -1,6 +1,5 @@
 package br.com.univali;
 
-
 class Attribute {
     private static final int MINIMUM_SCORE = 0;
     private static final int MAXIMUM_SCORE = 100;
