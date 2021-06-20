@@ -17,6 +17,31 @@ class Team {
     this.playerByNumber = playerByNumber;
   }
 
+  void replace(String oldPlayerNumber, String newPlayerNumber, Player newPlayer) {
+    Player oldPlayer = playerByNumber.get(oldPlayerNumber);
+    if (oldPlayer == null) {
+      throw new IllegalArgumentException("No existing player with such number");
+    }
+    if (oldPlayer.getPosition() != newPlayer.getPosition()) {
+      throw new IllegalArgumentException(
+          "The position of the new player needs to be the same as the one being replaced");
+    }
+    if (oldPlayerNumber.equals(newPlayerNumber)) {
+      playerByNumber.replace(oldPlayerNumber, newPlayer);
+    } else {
+      checkIfHasPlayerWithNumber(playerByNumber, newPlayerNumber);
+      playerByNumber.remove(oldPlayerNumber);
+      playerByNumber.put(newPlayerNumber, newPlayer);
+    }
+  }
+
+  private static void checkIfHasPlayerWithNumber(
+      Map<String, Player> playerByNumber, String number) {
+    if (playerByNumber.containsKey(number)) {
+      throw new IllegalArgumentException("There cannot be players with duplicate numbers");
+    }
+  }
+
   static class Builder {
     private final Map<String, Player> playerByNumber = new HashMap<>();
     private final String name;
@@ -26,9 +51,7 @@ class Team {
     }
 
     Builder player(String number, Player player) {
-      if (playerByNumber.containsKey(number)) {
-        throw new IllegalArgumentException("There cannot be players with duplicate numbers");
-      }
+      checkIfHasPlayerWithNumber(playerByNumber, number);
       playerByNumber.put(number, player);
       return this;
     }
