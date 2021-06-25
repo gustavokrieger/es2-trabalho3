@@ -1,8 +1,22 @@
 package br.com.univali;
 
-class MatchTest {
-  private final Team brazil = buildBrazil();
-  private final Team argentina = buildArgentina();
+import org.junit.jupiter.api.Test;
+
+import java.time.Clock;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Random;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class MatchSimulatorTest {
+  private final LocalDate localDate = LocalDate.of(2006, 9, 3);
+  private final MatchSimulator matchSimulator = createMatchSimulator();
+
+  private MatchSimulator createMatchSimulator() {
+    return new MatchSimulator(buildBrazil(), buildArgentina(), new Random(0), createClock());
+  }
 
   private Team buildBrazil() {
     var dida =
@@ -65,5 +79,19 @@ class MatchTest {
         .player("7", javierSaviola)
         .player("19", lionelMessi)
         .build();
+  }
+
+  private Clock createClock() {
+    ZoneId zoneId = ZoneId.systemDefault();
+    Instant instant = localDate.atStartOfDay(zoneId).toInstant();
+    return Clock.fixed(instant, zoneId);
+  }
+
+  @Test
+  void testExecution() {
+    MatchSimulator.Result result = matchSimulator.execute();
+    assertEquals(2, result.homeGoals());
+    assertEquals(0, result.awayGoals());
+    assertEquals(localDate, result.date());
   }
 }
