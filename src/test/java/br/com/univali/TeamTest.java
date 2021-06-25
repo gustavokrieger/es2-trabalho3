@@ -84,5 +84,16 @@ class TeamTest {
           assertThrows(IllegalArgumentException.class, () -> team.replace("2", "6", cafu));
       assertEquals("There cannot be players with duplicate numbers", exception.getMessage());
     }
+
+    @Test
+    void testCalculateTotalSkill() {
+      int totalSkill =
+          dida.calculateSkill()
+              + cafu.calculateSkill()
+              + cicinho.calculateSkill()
+              + adriano.calculateSkill()
+              + ronaldo.calculateSkill();
+      assertEquals(totalSkill, team.calculateTotalSkill());
+    }
   }
 }

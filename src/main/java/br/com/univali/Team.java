@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-class Team {
+final class Team {
   private static final int GOALKEEPERS = 1;
   private static final int DEFENDERS = 2;
   private static final int FORWARDS = 2;
@@ -40,6 +40,10 @@ class Team {
     if (playerByNumber.containsKey(number)) {
       throw new IllegalArgumentException("There cannot be players with duplicate numbers");
     }
+  }
+
+  int calculateTotalSkill() {
+    return playerByNumber.values().stream().mapToInt(Player::calculateSkill).sum();
   }
 
   static class Builder {
