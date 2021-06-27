@@ -12,6 +12,10 @@ class MatchSimulator {
   private final Random random;
   private final Clock clock;
 
+  MatchSimulator(Team home, Team away) {
+    this(home, away, new Random(), Clock.systemDefaultZone());
+  }
+
   MatchSimulator(Team home, Team away, Random random, Clock clock) {
     this.home = home;
     this.away = away;
