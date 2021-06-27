@@ -11,10 +11,12 @@ final class Team {
 
   private final String name;
   private final Map<String, Player> playerByNumber;
+  private final TeamStatistics teamStatistics;
 
-  private Team(String name, Map<String, Player> playerByNumber) {
+  private Team(String name, Map<String, Player> playerByNumber, TeamStatistics teamStatistics) {
     this.name = name;
     this.playerByNumber = playerByNumber;
+    this.teamStatistics = teamStatistics;
   }
 
   void replace(String oldPlayerNumber, String newPlayerNumber, Player newPlayer) {
@@ -46,12 +48,46 @@ final class Team {
     return playerByNumber.values().stream().mapToInt(Player::calculateSkill).sum();
   }
 
+  int getWins() {
+    return teamStatistics.getWins();
+  }
+
+  int getTies() {
+    return teamStatistics.getTies();
+  }
+
+  int getScore() {
+    return teamStatistics.getScore();
+  }
+
+  int getGoals() {
+    return teamStatistics.getGoals();
+  }
+
+  void scoreWin() {
+    teamStatistics.scoreWin();
+  }
+
+  void scoreTie() {
+    teamStatistics.scoreTie();
+  }
+
+  void scoreGoals(int goals) {
+    teamStatistics.scoreGoals(goals);
+  }
+
   static class Builder {
     private final Map<String, Player> playerByNumber = new HashMap<>();
     private final String name;
+    private final TeamStatistics teamStatistics;
 
     Builder(String name) {
+      this(name, new TeamStatistics());
+    }
+
+    Builder(String name, TeamStatistics teamStatistics) {
       this.name = name;
+      this.teamStatistics = teamStatistics;
     }
 
     Builder player(String number, Player player) {
@@ -62,7 +98,7 @@ final class Team {
 
     Team build() {
       checkFormation();
-      return new Team(name, playerByNumber);
+      return new Team(name, playerByNumber, teamStatistics);
     }
 
     private void checkFormation() {
