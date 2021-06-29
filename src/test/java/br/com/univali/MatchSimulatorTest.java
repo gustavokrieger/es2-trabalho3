@@ -16,32 +16,34 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class MatchSimulatorTest {
-  @Mock private Team team1;
-  @Mock private Team team2;
+  @Mock private Team home;
+  @Mock private Team away;
   @Mock private Random random;
   private MatchSimulator matchSimulator;
 
   @BeforeEach
   void init() {
-    matchSimulator = new MatchSimulator(team1, team2, random);
+    matchSimulator = new MatchSimulator(home, away, random);
   }
 
   @Test
   void testExecution() {
-    when(team1.calculateTotalSkill()).thenReturn(265);
-    when(team2.calculateTotalSkill()).thenReturn(231);
-    when(random.nextBoolean()).thenReturn(true).thenReturn(true).thenReturn(false);
+    when(home.calculateTotalSkill()).thenReturn(100);
+    when(away.calculateTotalSkill()).thenReturn(50);
+    when(random.nextBoolean()).thenReturn(true).thenReturn(false);
+    when(random.nextInt(110)).thenReturn(55);
+    when(random.nextInt(50)).thenReturn(25);
 
-    LocalDate localDate = LocalDate.of(2006, 9, 3);
+    LocalDate now = LocalDate.of(2006, 9, 3);
     MatchSimulator.Result result;
     try (MockedStatic<LocalDate> mockedStatic = mockStatic(LocalDate.class)) {
-      mockedStatic.when(LocalDate::now).thenReturn(localDate);
+      mockedStatic.when(LocalDate::now).thenReturn(now);
 
       result = matchSimulator.execute();
     }
 
-    assertEquals(2, result.homeGoals());
+    assertEquals(1, result.homeGoals());
     assertEquals(0, result.awayGoals());
-    assertEquals(localDate, result.date());
+    assertEquals(now, result.date());
   }
 }
