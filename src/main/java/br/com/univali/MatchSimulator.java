@@ -1,6 +1,5 @@
 package br.com.univali;
 
-import java.time.Clock;
 import java.time.LocalDate;
 import java.util.Random;
 
@@ -10,17 +9,15 @@ class MatchSimulator {
   private final Team home;
   private final Team away;
   private final Random random;
-  private final Clock clock;
 
   MatchSimulator(Team home, Team away) {
-    this(home, away, new Random(), Clock.systemDefaultZone());
+    this(home, away, new Random());
   }
 
-  MatchSimulator(Team home, Team away, Random random, Clock clock) {
+  MatchSimulator(Team home, Team away, Random random) {
     this.home = home;
     this.away = away;
     this.random = random;
-    this.clock = clock;
   }
 
   Result execute() {
@@ -38,7 +35,7 @@ class MatchSimulator {
         awayGoals++;
       }
     }
-    return new Result(homeGoals, awayGoals, LocalDate.now(clock));
+    return new Result(homeGoals, awayGoals, LocalDate.now());
   }
 
   private int generateNumberOfGoals() {
