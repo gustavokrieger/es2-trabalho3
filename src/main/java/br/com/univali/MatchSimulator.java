@@ -35,6 +35,8 @@ class MatchSimulator {
         awayGoals++;
       }
     }
+    home.scoreGoals(homeGoals);
+    away.scoreGoals(awayGoals);
     return new Result(homeGoals, awayGoals, LocalDate.now());
   }
 

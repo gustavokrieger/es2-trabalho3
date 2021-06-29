@@ -11,8 +11,7 @@ import java.time.LocalDate;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class MatchSimulatorTest {
@@ -42,6 +41,8 @@ class MatchSimulatorTest {
       result = matchSimulator.execute();
     }
 
+    verify(home).scoreGoals(1);
+    verify(away).scoreGoals(0);
     assertEquals(1, result.homeGoals());
     assertEquals(0, result.awayGoals());
     assertEquals(now, result.date());
