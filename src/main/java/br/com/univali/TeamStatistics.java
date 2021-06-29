@@ -36,6 +36,10 @@ class TeamStatistics {
   }
 
   void scoreGoals(int goals) {
+    if (goals < 0) {
+      throw new IllegalArgumentException("Cannot score negative goals");
+    }
+
     this.goals += goals;
   }
 }
