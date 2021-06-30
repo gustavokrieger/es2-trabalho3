@@ -8,6 +8,7 @@ class Player {
   private final Attribute primary;
   private final Attribute secondary;
 
+  // TODO: replace age with date of birth.
   Player(String name, int age, Position position, Attribute primary, Attribute secondary) {
     this.name = name;
     this.age = age;
