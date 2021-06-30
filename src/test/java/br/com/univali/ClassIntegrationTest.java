@@ -2,6 +2,12 @@ package br.com.univali;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Collection;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 class ClassIntegrationTest {
   private Player dida;
   private Player cafu;
@@ -13,15 +19,27 @@ class ClassIntegrationTest {
   private Player fabricioColoccini;
   private Player javierSaviola;
   private Player lionelMessi;
+  private Player replacement;
 
   private Team brazil;
   private Team argentina;
 
-  // TODO: finish test.
+  private Collection<MatchSimulator> matchSimulators;
+  private Iterable<MatchSimulator.Result> matchSimulatorResults;
+
   @Test
   void testCompleteExecution() {
     createPlayers();
     createTeams();
+    replacePlayer();
+    addMatchSimulators();
+    executeMatchSimulators();
+
+    for (MatchSimulator.Result result : matchSimulatorResults) {
+      assertTrue(result.homeGoals() >= 0);
+      assertTrue(result.awayGoals() >= 0);
+      assertNotNull(result.date());
+    }
   }
 
   private void createPlayers() {
@@ -66,6 +84,9 @@ class ClassIntegrationTest {
     lionelMessi =
         new Player(
             "Lionel Messi", 18, Position.FORWARD, Attribute.fromScore(90), Attribute.fromScore(90));
+    replacement =
+        new Player(
+            "Pele", 66, Position.GOALKEEPER, Attribute.fromScore(100), Attribute.fromHeight(200));
   }
 
   private void createTeams() {
@@ -85,5 +106,19 @@ class ClassIntegrationTest {
             .player("7", javierSaviola)
             .player("19", lionelMessi)
             .build();
+  }
+
+  private void replacePlayer() {
+    brazil.replace("1", "1", replacement);
+  }
+
+  private void addMatchSimulators() {
+    MatchSimulator matchSimulator1 = new MatchSimulator(brazil, argentina);
+    MatchSimulator matchSimulator2 = new MatchSimulator(argentina, brazil);
+    matchSimulators = List.of(matchSimulator1, matchSimulator2);
+  }
+
+  private void executeMatchSimulators() {
+    matchSimulatorResults = matchSimulators.stream().map(MatchSimulator::execute).toList();
   }
 }
