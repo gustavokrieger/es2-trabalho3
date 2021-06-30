@@ -63,6 +63,10 @@ final class Team {
     return teamStatistics.getTies();
   }
 
+  int getLosses() {
+    return teamStatistics.getLosses();
+  }
+
   int getScore() {
     return teamStatistics.getScore();
   }
@@ -71,12 +75,16 @@ final class Team {
     return teamStatistics.getGoals();
   }
 
-  void scoreWin() {
-    teamStatistics.scoreWin();
+  void addWin() {
+    teamStatistics.addWin();
   }
 
-  void scoreTie() {
-    teamStatistics.scoreTie();
+  void addTie() {
+    teamStatistics.addTie();
+  }
+
+  void addLoss() {
+    teamStatistics.addLoss();
   }
 
   void scoreGoals(int goals) {

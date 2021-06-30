@@ -6,6 +6,7 @@ class TeamStatistics {
 
   private int wins = 0;
   private int ties = 0;
+  private int losses = 0;
   private int score = 0;
   private int goals = 0;
 
@@ -17,6 +18,10 @@ class TeamStatistics {
     return ties;
   }
 
+  int getLosses() {
+    return losses;
+  }
+
   int getScore() {
     return score;
   }
@@ -25,14 +30,18 @@ class TeamStatistics {
     return goals;
   }
 
-  void scoreWin() {
+  void addWin() {
     wins++;
     score += WIN_SCORE;
   }
 
-  void scoreTie() {
+  void addTie() {
     ties++;
     score += TIE_SCORE;
+  }
+
+  void addLoss() {
+    losses++;
   }
 
   void scoreGoals(int goals) {

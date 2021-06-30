@@ -15,17 +15,24 @@ class TeamStatisticsTest {
   }
 
   @Test
-  void testScoreWin() {
-    teamStatistics.scoreWin();
+  void testAddWin() {
+    teamStatistics.addWin();
     assertEquals(1, teamStatistics.getWins());
     assertEquals(3, teamStatistics.getScore());
   }
 
   @Test
-  void testScoreTie() {
-    teamStatistics.scoreTie();
+  void testAddTie() {
+    teamStatistics.addTie();
     assertEquals(1, teamStatistics.getTies());
     assertEquals(1, teamStatistics.getScore());
+  }
+
+  @Test
+  void testAddLoss() {
+    teamStatistics.addLoss();
+    assertEquals(1, teamStatistics.getLosses());
+    assertEquals(0, teamStatistics.getScore());
   }
 
   @Test
