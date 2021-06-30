@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Random;
 
 class MatchSimulator {
+  // The home team will have its skill multiplied by this so that it has an advantage.
   private static final float HOME_SKILL_MULTIPLIER = 1.1F;
 
   private final Team home;
