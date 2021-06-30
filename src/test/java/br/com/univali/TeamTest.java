@@ -7,8 +7,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Random;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -56,6 +59,8 @@ class TeamTest {
 
   @Nested
   class AfterBuild {
+    @Mock private TeamStatistics teamStatistics;
+    @Mock private Random random;
     @Mock private Player player1;
     @Mock private Player player2;
     @Mock private Player player3;
@@ -72,7 +77,7 @@ class TeamTest {
       when(player5.getPosition()).thenReturn(Position.FORWARD);
 
       team =
-          new Team.Builder("Brazil")
+          new Team.Builder("Brazil", teamStatistics, random)
               .player("1", player1)
               .player("2", player2)
               .player("3", player3)
@@ -119,6 +124,16 @@ class TeamTest {
       when(player5.calculateSkill()).thenReturn(1);
 
       assertEquals(5, team.calculateTotalSkill());
+    }
+
+    @Test
+    void testScoreGoals() {
+      when(random.nextInt(5)).thenReturn(0);
+
+      int goals = 1;
+      team.scoreGoals(goals);
+      verify(teamStatistics).scoreGoals(goals);
+      verify(player1).scoreGoal();
     }
   }
 }
