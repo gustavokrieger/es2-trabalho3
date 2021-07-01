@@ -1,17 +1,20 @@
 package br.com.univali;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 class Player {
   private int goals = 0;
   private final String name;
-  private final int age;
+  private final LocalDate birthDate;
   private final Position position;
   private final Attribute primary;
   private final Attribute secondary;
 
-  // TODO: replace age with date of birth.
-  Player(String name, int age, Position position, Attribute primary, Attribute secondary) {
+  Player(
+      String name, LocalDate birthDate, Position position, Attribute primary, Attribute secondary) {
     this.name = name;
-    this.age = age;
+    this.birthDate = birthDate;
     this.position = position;
     this.primary = primary;
     this.secondary = secondary;
@@ -27,6 +30,10 @@ class Player {
 
   void scoreGoal() {
     goals++;
+  }
+
+  int calculateAge() {
+    return Period.between(birthDate, LocalDate.now()).getYears();
   }
 
   int calculateSkill() {

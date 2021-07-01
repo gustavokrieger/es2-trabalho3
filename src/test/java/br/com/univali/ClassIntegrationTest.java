@@ -2,6 +2,7 @@ package br.com.univali;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
@@ -45,48 +46,81 @@ class ClassIntegrationTest {
   private void createPlayers() {
     dida =
         new Player(
-            "Dida", 32, Position.GOALKEEPER, Attribute.fromScore(100), Attribute.fromHeight(196));
+            "Dida",
+            LocalDate.of(1974, 9, 3),
+            Position.GOALKEEPER,
+            Attribute.fromScore(100),
+            Attribute.fromHeight(196));
     cafu =
-        new Player("Cafu", 36, Position.DEFENDER, Attribute.fromScore(0), Attribute.fromScore(50));
+        new Player(
+            "Cafu",
+            LocalDate.of(1970, 3, 9),
+            Position.DEFENDER,
+            Attribute.fromScore(0),
+            Attribute.fromScore(50));
     cicinho =
         new Player(
-            "Cicinho", 33, Position.DEFENDER, Attribute.fromScore(50), Attribute.fromScore(50));
+            "Cicinho",
+            LocalDate.of(1973, 1, 2),
+            Position.DEFENDER,
+            Attribute.fromScore(50),
+            Attribute.fromScore(50));
     adriano =
         new Player(
-            "Adriano", 24, Position.FORWARD, Attribute.fromScore(41), Attribute.fromScore(74));
+            "Adriano",
+            LocalDate.of(1982, 2, 1),
+            Position.FORWARD,
+            Attribute.fromScore(41),
+            Attribute.fromScore(74));
     ronaldo =
         new Player(
-            "Ronaldo", 29, Position.FORWARD, Attribute.fromScore(0), Attribute.fromScore(50));
+            "Ronaldo",
+            LocalDate.of(1982, 2, 1),
+            Position.FORWARD,
+            Attribute.fromScore(0),
+            Attribute.fromScore(50));
     robertoAbbondanzieri =
         new Player(
             "Roberto Abbondanzieri",
-            33,
+            LocalDate.of(1977, 1, 1),
             Position.GOALKEEPER,
             Attribute.fromScore(0),
             Attribute.fromHeight(196));
     robertoAyala =
         new Player(
-            "Roberto Ayala", 33, Position.DEFENDER, Attribute.fromScore(0), Attribute.fromScore(0));
+            "Roberto Ayala",
+            LocalDate.of(1973, 12, 12),
+            Position.DEFENDER,
+            Attribute.fromScore(0),
+            Attribute.fromScore(0));
     fabricioColoccini =
         new Player(
             "Fabricio Coloccini",
-            24,
+            LocalDate.of(1982, 12, 12),
             Position.DEFENDER,
             Attribute.fromScore(50),
             Attribute.fromScore(50));
     javierSaviola =
         new Player(
             "Javier Saviola",
-            24,
+            LocalDate.of(1982, 9, 10),
             Position.FORWARD,
             Attribute.fromScore(41),
             Attribute.fromScore(74));
     lionelMessi =
         new Player(
-            "Lionel Messi", 18, Position.FORWARD, Attribute.fromScore(90), Attribute.fromScore(90));
+            "Lionel Messi",
+            LocalDate.of(1988, 9, 10),
+            Position.FORWARD,
+            Attribute.fromScore(90),
+            Attribute.fromScore(90));
     replacement =
         new Player(
-            "Pele", 66, Position.GOALKEEPER, Attribute.fromScore(100), Attribute.fromHeight(200));
+            "Pele",
+            LocalDate.of(1940, 10, 23),
+            Position.GOALKEEPER,
+            Attribute.fromScore(100),
+            Attribute.fromHeight(200));
   }
 
   private void createTeams() {
