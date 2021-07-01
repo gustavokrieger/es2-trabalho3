@@ -9,8 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -86,7 +85,15 @@ class TeamTest {
               .build();
     }
 
-    // TODO: add successful replace tests.
+    @Test
+    void testReplace(@Mock Player replacement) {
+      when(replacement.getPosition()).thenReturn(Position.GOALKEEPER);
+
+      String playerNumber = "1";
+
+      team.replace(playerNumber, playerNumber, replacement);
+      assertSame(replacement, team.retrievePlayerByNumber(playerNumber));
+    }
 
     @Test
     void testReplaceNonexistent() {

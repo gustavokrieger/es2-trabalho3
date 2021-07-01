@@ -26,6 +26,10 @@ final class Team {
     this.random = random;
   }
 
+  Player retrievePlayerByNumber(String number) {
+    return playerByNumber.get(number);
+  }
+
   void replace(String oldPlayerNumber, String newPlayerNumber, Player newPlayer) {
     Player oldPlayer = playerByNumber.get(oldPlayerNumber);
     if (oldPlayer == null) {
